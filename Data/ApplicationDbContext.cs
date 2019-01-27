@@ -17,5 +17,9 @@ namespace vscode_spice.Data
         public DbSet<Category> Category { get; set; }
         // dotnet ef migrations add addCategoryToDatabase
         // dotnet ef database update
+        public DbSet<SubCategory> SubCategory { get; set; }
+        // dotnet ef migrations add addSubCategoryToDatabase
+        // dotnet ef database update
+
     }
 }

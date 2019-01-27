@@ -1,6 +1,6 @@
 @{
-    ViewData["Title"] = "sjabloon";
+    ViewData["Title"] = "sjabloon-name";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Sjablone Name</h1>

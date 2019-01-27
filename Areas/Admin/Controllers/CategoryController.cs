@@ -66,7 +66,7 @@ namespace vscode_spice.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Category category)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _db.Update(category);
                 await _db.SaveChangesAsync();
@@ -98,7 +98,7 @@ namespace vscode_spice.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int? id)
         {
             var category = await _db.Category.FindAsync(id);
-            if(category == null)
+            if (category == null)
             {
                 return View();
             }
