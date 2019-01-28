@@ -2,17 +2,15 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using vscode_spice.Data;
 
-namespace vscode_spice.Data.Migrations
+namespace vscode_spice.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190123141412_addSubCategoryToDatabase")]
-    partial class addSubCategoryToDatabase
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -192,6 +190,35 @@ namespace vscode_spice.Data.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("vscode_spice.Models.MenuItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CategoryId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<double>("Price");
+
+                    b.Property<string>("Spicyness");
+
+                    b.Property<int>("SubCategoryId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("MenuItem");
+                });
+
             modelBuilder.Entity("vscode_spice.Models.SubCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -251,6 +278,19 @@ namespace vscode_spice.Data.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("vscode_spice.Models.MenuItem", b =>
+                {
+                    b.HasOne("vscode_spice.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("vscode_spice.Models.SubCategory", "SubCategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

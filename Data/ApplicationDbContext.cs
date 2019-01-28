@@ -20,6 +20,14 @@ namespace vscode_spice.Data
         public DbSet<SubCategory> SubCategory { get; set; }
         // dotnet ef migrations add addSubCategoryToDatabase
         // dotnet ef database update
+        public DbSet<MenuItem> MenuItem { get; set; }
+        // dotnet ef migrations add addMenuItemToDatabase
+
+        // WARNING
+        // Gives error when using SQL Server but not on SLQ Lite
+        // Change onDelete: ReferentialAction.NoAction);
+        // befor database update
+        // dotnet ef database update
 
     }
 }
