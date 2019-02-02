@@ -1,19 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+using vscode_spice.Data;
 using vscode_spice.Models;
+using vscode_spice.Models.ViewModels;
 
 namespace vscode_spice.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
-        [Area("Customer")]
-        public IActionResult Index()
+        private readonly ApplicationDbContext _db;
+
+        public HomeController(ApplicationDbContext db)
         {
-            return View();
+            _db = db;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            IndexViewModel IndexVM = new IndexViewModel()
+            {
+                MenuItem = await _db.MenuItem.Include(m => m.Category).Include(m => m.SubCategory).ToListAsync(),
+                Category = await _db.Category.ToListAsync(),
+                Coupon = await _db.Coupon.Where(c => c.IsActive == true).ToListAsync()
+
+            };
+            return View(IndexVM);
         }
 
         public IActionResult Privacy()
