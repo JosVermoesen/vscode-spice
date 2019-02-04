@@ -9,8 +9,8 @@ using vscode_spice.Data;
 namespace vscode_spice.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190131201336_addCouponToDatabase")]
-    partial class addCouponToDatabase
+    [Migration("20190204163930_InitDb")]
+    partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
