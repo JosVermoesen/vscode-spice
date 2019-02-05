@@ -36,7 +36,7 @@ namespace vscode_spice.Areas.Identity.Pages.Account
             }
             else
             {
-                return Page();
+                return RedirectToPage("Logout");
             }
         }
     }
