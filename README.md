@@ -27,7 +27,7 @@ Fresh starting in terminal:
 
 - **Make** directory `md vscode-spice`
 - **cd** into that directory `cd vscode-spice`
-- **generate** the new project with template `dotnet new webapp vscode-spice --auth Individual` for MVC Webapp with razor pages and identity with sql lite database.
+- **generate** the new project with template `dotnet new webapp --auth Individual` for MVC Webapp with razor pages and identity with sql lite database.
 - add **package reference** for preparing all identity code `dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design` followed by `dotnet restore`
 - for adding **all identity** functions `dotnet aspnet-codegenerator identity -dc vscode_spice.Data.ApplicationDbContext`
 - **remove** the sqllite database and migrations folder
