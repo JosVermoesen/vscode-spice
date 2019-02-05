@@ -18,14 +18,17 @@ To get more help on dotnet commands use `dotnet -h` or go check out the [dotnet 
 
 ## Fresh start in Visual Studio Code
 
-In terminal `dotnet new --install Microsoft.DotNet.Web.Spa.ProjectTemplates::2.2.1` to get the latest templates.
-In terminal `dotnet new -h` to list the available templates.
+Latest template:
 
-I.e. in terminal
-a) make a directory `md vscode-spice`
-b) cd into that directory `cd vscode-spice`
-c) generate the new project with template `dotnet new webapp vscode-spice --auth Individual` for MVC Webapp with razor pages and identity with sql lite database.
-d) add package reference for generating all identity `dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design` followed by `dotnet restore`
-e) for adding complete identity functions `dotnet aspnet-codegenerator identity -dc vscode_spice.Data.ApplicationDbContext`
-f) remove the sqllite database and migrations folder
-g) start a clean db with full identity functionality `dotnet ef migrations add InitDbWithFullIdentity` and refresh the new db `dotnet ef database update`
+- In terminal `dotnet new --install Microsoft.DotNet.Web.Spa.ProjectTemplates::2.2.1` to get the latest templates.
+- In terminal `dotnet new -h` to list the available templates.
+
+Fresh starting in terminal:
+
+- **Make** directory `md vscode-spice`
+- **cd** into that directory `cd vscode-spice`
+- **generate** the new project with template `dotnet new webapp vscode-spice --auth Individual` for MVC Webapp with razor pages and identity with sql lite database.
+- add **package reference** for preparing all identity code `dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design` followed by `dotnet restore`
+- for adding **all identity** functions `dotnet aspnet-codegenerator identity -dc vscode_spice.Data.ApplicationDbContext`
+- **remove** the sqllite database and migrations folder
+- start a **clean db** with full identity functionality `dotnet ef migrations add InitDbWithFullIdentity` and refresh the new db `dotnet ef database update`
