@@ -29,9 +29,12 @@ namespace vscode_spice.Data
 
         public DbSet<Coupon> Coupon { get; set; }
         // dotnet ef migrations add addCouponToDatabase
-        // dotnet ef database update
+
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         // dotnet ef migrations add addMoreFieldsToIdentityUser
+
+        public DbSet<ShoppingCart> ShoppingCart { get; set; }
+        // dotnet ef migrations add addShoppingCartToDatabase
         // dotnet ef database update
     }
 }
