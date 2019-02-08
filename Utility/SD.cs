@@ -9,5 +9,7 @@ namespace vscode_spice.Utility
         public const string KitchenUser = "Kitchen";
         public const string FrontDeskUser = "FrondDesk";
         public const string CustomerEndUser = "Customer";
+
+        public const string ssShoppingCartCount = "ssCartCount";
     }
 }

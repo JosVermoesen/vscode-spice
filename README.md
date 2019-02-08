@@ -1,7 +1,6 @@
 # vscode-spice
 
-This project was generated with [dotnet core](https://dotnet.microsoft.com/download/) version 2.2.1.
-[Install latest templates](https://www.nuget.org/packages/Microsoft.DotNet.Web.Spa.ProjectTemplates)
+This project was build with [dotnet core](https://dotnet.microsoft.com/download/) version 2.2.1.
 
 ## Clone our app on git in Visual Studio Code
 
