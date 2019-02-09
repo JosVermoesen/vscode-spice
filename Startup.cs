@@ -10,9 +10,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using vscode_spice.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
+using vscode_spice.Data;
 
 namespace vscode_spice
 {
@@ -47,11 +48,11 @@ namespace vscode_spice
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSession(options =>
-            {
-                options.Cookie.IsEssential = true;
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
-                options.Cookie.HttpOnly = true;
-            });
+                {
+                    options.Cookie.IsEssential = true;
+                    options.IdleTimeout = TimeSpan.FromMinutes(30);
+                    options.Cookie.HttpOnly = true;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +75,8 @@ namespace vscode_spice
             app.UseCookiePolicy();
             app.UseSession();
             app.UseAuthentication();
+
+            app.UseRequestLocalization("en-UK");
 
             app.UseMvc(routes =>
             {
