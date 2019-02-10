@@ -1,3 +1,6 @@
+using System;
+using vscode_spice.Models;
+
 namespace vscode_spice.Utility
 {
     public static class SD
@@ -9,8 +12,8 @@ namespace vscode_spice.Utility
         public const string KitchenUser = "Kitchen";
         public const string FrontDeskUser = "FrondDesk";
         public const string CustomerEndUser = "Customer";
-
         public const string ssShoppingCartCount = "ssCartCount";
+        public const string ssCouponCode = "ssCouponCode";
 
 
         public static string ConvertToRawHtml(string source)
@@ -39,6 +42,35 @@ namespace vscode_spice.Utility
                 }
             }
             return new string(array, 0, arrayIndex);
+        }
+
+        public static double DiscountedPrice(Coupon couponFromDb, double originalOrderTotal)
+        {
+            if (couponFromDb == null)
+            {
+                return originalOrderTotal;
+            }
+            else
+            {
+                if (couponFromDb.MinimumAmount > originalOrderTotal)
+                {
+                    return originalOrderTotal;
+                }
+                else
+                {
+                    // everything is valid
+                    if (Convert.ToInt32(couponFromDb.CouponType) == (int)Coupon.ECouponType.Dollar)
+                    {
+                        return Math.Round(originalOrderTotal - couponFromDb.Discount, 2);
+                    }
+
+                    if (Convert.ToInt32(couponFromDb.CouponType) == (int)Coupon.ECouponType.Percent)
+                    {
+                        return Math.Round(originalOrderTotal - (originalOrderTotal * couponFromDb.Discount / 100), 2);
+                    }
+                }
+                return originalOrderTotal;
+            }
         }
     }
 }
