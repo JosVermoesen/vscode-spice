@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using vscode_spice.Data;
+using vscode_spice.Utility;
+using Stripe;
 
 namespace vscode_spice
 {
@@ -45,6 +47,8 @@ namespace vscode_spice
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSession(options =>
@@ -69,6 +73,8 @@ namespace vscode_spice
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            StripeConfiguration.SetApiKey(Configuration.GetSection("Stripe")["SecretKey"]);
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
