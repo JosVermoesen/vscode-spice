@@ -4,7 +4,7 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-<form method="post">
+<form asp-action="OrderPickup" asp-controller="Order" asp-route-orderId="@Model.OrderHeader.Id" method="post">
     <div class="container row border ml-1 backgroundWhiteBorder10Padding" style="width:100%">
         <div class="col-lg-8 col-12" style="border-right:1px solid #bbb9b9">
             <br />
@@ -60,6 +60,8 @@
             </div>
         </div>
 
+
+
         <div class="col-lg-4 col-12">
             <h4 class="d-flex justify-content-between align-content-center mb-3">
                 <span class="text-muted">Order ID: </span>
@@ -87,8 +89,8 @@
                     </li>
                 }
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                    <span class="text-info"> Total (EUR)</span>
-                    <strong class="text-info">€ @Model.OrderHeader.OrderTotal</strong>
+                    <span class="text-info"> Total (USD)</span>
+                    <strong class="text-info">$@Model.OrderHeader.OrderTotal</strong>
                 </li>
 
             </ul>
