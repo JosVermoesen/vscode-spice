@@ -51,6 +51,13 @@ namespace vscode_spice
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = "783204862053702";
+                facebookOptions.AppSecret = "167804009b84f7b8107b6efc6ae0ee18";
+
+            });
+
             services.AddSession(options =>
                 {
                     options.Cookie.IsEssential = true;
