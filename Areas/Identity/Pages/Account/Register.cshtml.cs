@@ -138,9 +138,9 @@ namespace vscode_spice.Areas.Identity.Pages.Account
                         }
                     }
 
-                    return RedirectToAction("Index", "User", new { area = "Admin" });
-
                     _logger.LogInformation("User created a new account with password.");
+
+                    return RedirectToAction("Index", "User", new { area = "Admin" });
 
                     /* var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Page(

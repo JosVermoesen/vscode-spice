@@ -89,7 +89,7 @@ namespace vscode_spice
             app.UseSession();
             app.UseAuthentication();
 
-            // app.UseRequestLocalization("en-UK");
+            app.UseRequestLocalization("en-UK");
 
             app.UseMvc(routes =>
             {
