@@ -58,6 +58,13 @@ namespace vscode_spice
 
             });
 
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = "1089688379189-fol2olru840v74121e13bshk4g9h36iq.apps.googleusercontent.com";
+                googleOptions.ClientSecret = "Lj5JRoiu8EDqIITRikzfkQBN";
+
+            });
+
             services.AddSession(options =>
                 {
                     options.Cookie.IsEssential = true;
