@@ -16,6 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 using vscode_spice.Data;
 using vscode_spice.Utility;
 using Stripe;
+using vscode_spice.Service;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace vscode_spice
 {
@@ -48,6 +50,8 @@ namespace vscode_spice
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<EmailOptions>(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
