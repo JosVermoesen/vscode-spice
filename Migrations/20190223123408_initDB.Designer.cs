@@ -9,8 +9,8 @@ using vscode_spice.Data;
 namespace vscode_spice.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190204163930_InitDb")]
-    partial class InitDb
+    [Migration("20190223123408_initDB")]
+    partial class initDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,6 +70,9 @@ namespace vscode_spice.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -108,6 +111,8 @@ namespace vscode_spice.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -131,11 +136,9 @@ namespace vscode_spice.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("ProviderKey");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -166,11 +169,9 @@ namespace vscode_spice.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<string>("Name");
 
                     b.Property<string>("Value");
 
@@ -245,6 +246,87 @@ namespace vscode_spice.Migrations
                     b.ToTable("MenuItem");
                 });
 
+            modelBuilder.Entity("vscode_spice.Models.OrderDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Count");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("MenuItemId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("OrderId");
+
+                    b.Property<double>("Price");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MenuItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("vscode_spice.Models.OrderHeader", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Comments");
+
+                    b.Property<string>("CouponCode");
+
+                    b.Property<double>("CouponCodeDiscount");
+
+                    b.Property<DateTime>("OrderDate");
+
+                    b.Property<double>("OrderTotal");
+
+                    b.Property<double>("OrderTotalOriginal");
+
+                    b.Property<string>("PaymentStatus");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<DateTime>("PickUpTime");
+
+                    b.Property<string>("PickupName");
+
+                    b.Property<string>("Status");
+
+                    b.Property<string>("TransactionId");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("OrderHeader");
+                });
+
+            modelBuilder.Entity("vscode_spice.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ApplicationUserId");
+
+                    b.Property<int>("Count");
+
+                    b.Property<int>("MenuItemId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShoppingCart");
+                });
+
             modelBuilder.Entity("vscode_spice.Models.SubCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -260,6 +342,23 @@ namespace vscode_spice.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("SubCategory");
+                });
+
+            modelBuilder.Entity("vscode_spice.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("PostalCode");
+
+                    b.Property<string>("State");
+
+                    b.Property<string>("StreetAddress");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -317,6 +416,27 @@ namespace vscode_spice.Migrations
                     b.HasOne("vscode_spice.Models.SubCategory", "SubCategory")
                         .WithMany()
                         .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("vscode_spice.Models.OrderDetails", b =>
+                {
+                    b.HasOne("vscode_spice.Models.MenuItem", "MenuItem")
+                        .WithMany()
+                        .HasForeignKey("MenuItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("vscode_spice.Models.OrderHeader", "OrderHeader")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("vscode_spice.Models.OrderHeader", b =>
+                {
+                    b.HasOne("vscode_spice.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
