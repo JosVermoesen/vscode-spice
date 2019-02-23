@@ -2,7 +2,7 @@
 
 This project was build with [dotnet core](https://dotnet.microsoft.com/download/) version 2.2.1.
 
-## Clone our app on git in Visual Studio Code
+## Clone app on git in Visual Studio Code
 
 In terminal `git clone https://github.com/JosVermoesen/vscode-spice.git` to get the codefiles on your computer.
 Step into the directory `cd vscode-spice` and do a `dotnet restore`
