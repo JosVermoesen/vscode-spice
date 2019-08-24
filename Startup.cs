@@ -89,13 +89,16 @@ namespace vscode_spice
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                // app.UseHsts();
+                // also in launchSettings.json change/add https://localhost:5001 as below
+                // "applicationUrl": "https://localhost:5001;http://localhost:5000",
+                
             }
 
             StripeConfiguration.SetApiKey(Configuration.GetSection("Stripe")["SecretKey"]);
 
             dbInitializer.Initialize();
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();
